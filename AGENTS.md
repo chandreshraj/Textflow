@@ -42,7 +42,7 @@ README.md                 Setup, commands, usage, and limitations
 - Keep the core usable and testable without starting a web server.
 - Represent a pipeline as an ordered collection of transformation identifiers and parameter values.
 - Keep the library API focused on transformation discovery, parameter validation, and pipeline execution.
-- Use explicit registration or an appropriate discovery mechanism. Avoid a central switch statement that must be edited for each transformation.
+- Keep each transformation in its own public, stateless class under `core/transformations`, implementing `Transformation` and annotated with `@AutoService(Transformation.class)`. The compiler generates Java SPI registration and `TransformationDiscovery` loads providers. Do not add central registration lists or transformation-ID switches. See `docs/adding-transformations.md`.
 - Avoid databases, authentication, queues, and distributed infrastructure unless a concrete requirement justifies them.
 
 ## Metadata-driven configuration

@@ -14,7 +14,7 @@ class ApiTest {
     }
     @Test void discovery() throws Exception {
         var response=client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:"+port+"/api/transformations")).build(),HttpResponse.BodyHandlers.ofString());
-        assertEquals(200,response.statusCode()); assertTrue(response.body().contains("defaultValue")); assertTrue(response.body().contains("substring"));
+        assertEquals(200,response.statusCode()); assertTrue(response.body().contains("defaultValue")); assertTrue(response.body().contains("substring")); assertFalse(response.body().contains("test-decorate"));
     }
     @Test void execution() throws Exception {
         var r=post("""

@@ -91,7 +91,7 @@ Validation errors return HTTP 400 with `message`, nullable zero-based `step`, an
 
 See [architecture](docs/architecture.md) and [AI usage record](docs/ai-usage.md). The Java library has no web-framework dependencies. The server handles HTTP and calls the processor. The Vue application renders generic parameter controls; there is no transformation-ID switch for configuration or execution. Only the optional example loader names specific operations.
 
-To add an operation, implement `Transformation` in the core module and register it in `Builtins.all()`. Supply a stable ID and metadata using existing generic parameter types. The unchanged frontend discovers it on page load. `ProcessorTest.backendOnlyExtensionAndRepeatedSteps` demonstrates Java registration; the UI test discovers, configures, and executes an otherwise unknown operation.
+To add an operation, add a public class implementing `Transformation` and annotate it with `@AutoService(Transformation.class)`. Metadata and processing logic live together in that class. The compiler generates Java SPI registration; `TransformationDiscovery` loads providers in stable ID order. No central list, controller, or frontend edits are needed. Rebuild, restart the server, and reload the browser. See [adding a transformation](docs/adding-transformations.md) for a copyable example. `ProcessorTest.discoversAnnotatedClassWithoutRegistryChanges` verifies discovery and execution of a test-only provider; the UI test renders and executes previously unknown metadata.
 
 ## Scope and limitations
 

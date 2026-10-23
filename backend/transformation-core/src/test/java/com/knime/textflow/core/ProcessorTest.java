@@ -4,9 +4,19 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProcessorTest {
-    Processor processor=new Processor(Builtins.all());
+    Processor processor=new Processor(TransformationDiscovery.load());
     Processor.Step step(String id, Map<String,Object> params) { return new Processor.Step(id,params); }
     String run(String input,String id,Map<String,Object> params) { return processor.execute(input,List.of(step(id,params))).output(); }
+    @Test void discoversAnnotatedClassWithoutRegistryChanges() {
+        assertTrue(processor.descriptors().stream().anyMatch(d -> d.id().equals("test-decorate")));
+        assertEquals("Hello?",run("Hello","test-decorate",Map.of("suffix","?")));
+        assertEquals("Hello!",run("Hello","test-decorate",Map.of()));
+        assertThrows(TransformException.class,()->run("Hello","test-decorate",Map.of("suffix",false)));
+        var discovered=TransformationDiscovery.load();
+        assertEquals(discovered.stream().map(t -> t.descriptor().id()).sorted().toList(),
+                discovered.stream().map(t -> t.descriptor().id()).toList());
+        assertThrows(IllegalArgumentException.class,()->new Processor(List.of(discovered.getFirst(),discovered.getFirst())));
+    }
     @Test void orderedComposition() {
         var result=processor.execute("Fake Python",List.of(step("replace",Map.of("old","Fake","new","Real")),step("append",Map.of("text","!"))));
         assertEquals("Real Python!",result.output()); assertEquals("Real Python",result.steps().getFirst().output());
@@ -54,7 +64,7 @@ class ProcessorTest {
             public Descriptor descriptor() { return new Descriptor("reverse","Reverse","Reverse text",List.of()); }
             public String apply(String input,Map<String,Object> params) { return new StringBuilder(input).reverse().toString(); }
         };
-        var extended=new ArrayList<>(Builtins.all()); extended.add(reverse);
+        var extended=new ArrayList<>(TransformationDiscovery.load()); extended.add(reverse);
         var custom=new Processor(extended);
         assertEquals("reverse",custom.descriptors().getLast().id());
         assertEquals("cba",custom.execute("abc",List.of(step("reverse",Map.of()))).output());
