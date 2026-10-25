@@ -2,6 +2,8 @@
 
 A no-code string transformation studio for the KNIME full-stack assignment. Compose transformations, configure them through backend metadata, and inspect each step's result.
 
+![Textflow desktop interface showing the transformation pipeline and output](docs/desktop.png)
+
 ## Requirements
 
 - Java 25 LTS (verified with Temurin 25.0.4.1).
