@@ -136,6 +136,20 @@ To add an operation, add a public class implementing `Transformation` and annota
 
 See [measurements and implementation notes](docs/performance.md). Live previews retain their 250 ms debounce and cancellation. Large API responses and static assets negotiate gzip; metadata/results use shallow state, pipeline edits avoid deep watchers, and tooltip positioning is coalesced per animation frame.
 
+### Load test: throughput and latency
+
+Measured on October 24, 2026 against the local Podman service in an ARM64 VM with 5 CPUs and 2 GiB RAM, shared with another container. The table shows the warm second pass at **32 concurrent requests** to `POST /api/transform`, using persistent HTTP connections and gzip.
+
+| Input text / pipeline | Throughput (requests/sec) | Latency p50 | Latency p95 | Latency p99 |
+| --- | ---: | ---: | ---: | ---: |
+| 1,024 bytes / 3 steps | 12,030.2 | 2.24 ms | 5.56 ms | 8.25 ms |
+| 10,240 bytes / 10 steps | 1,176.0 | 24.34 ms | 55.81 ms | 77.67 ms |
+| 80,000 bytes / 30 steps | 28.7 | 1,072.63 ms | 1,539.59 ms | 1,629.57 ms |
+
+Across both passes and all concurrency levels (1, 8, and 32), **170,580 requests completed with zero failures**. Each case used a 1-second warmup and 4-second measurement window, followed by draining in-flight requests. Latency covers the HTTP request through receipt of the complete compressed response; it excludes browser decompression, parsing, rendering, and preview debounce. p95 means 95% of successful requests completed within that time.
+
+These short, closed-loop local measurements describe the tested synthetic mixed-transformation workloads, not guaranteed production capacity. The tested source revision was not recorded, and the results were not rerun for this documentation update. See the [full load-test report and raw results](docs/load-test-results.md) for all concurrency levels, response sizes, browser latency, and limitations.
+
 ## Scope and limitations
 
 This is a local assignment application, with no authentication, persistence, or multi-user storage. Refreshing resets the workspace. The processor is synchronous and returns intermediate text for all steps. RE2/J avoids catastrophic backtracking but deliberately supports a subset of Java regex syntax. UI character counts and length limits use JavaScript/Java UTF-16 units, while substring indices use Unicode code points, not grapheme clusters. The visual theme is adapted from [KNIME](https://www.knime.com/), with shared tokens in `frontend/src/styles/theme.css`. Figtree and Inter load from Google Fonts when available, with local fallbacks. A hostile multi-user deployment would need deployment-specific rate limiting and concurrency controls.

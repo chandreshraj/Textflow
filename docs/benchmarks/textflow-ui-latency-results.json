@@ -1,0 +1,9 @@
+{
+  "samples": 20,
+  "workload": "Initial Replace + Append example, short text, idle service",
+  "metric": "Input event until correct output DOM followed by two animation frames; includes 250ms debounce, API, parsing and render scheduling",
+  "p50Ms": 297.80000001192093,
+  "p95Ms": 299.10000002384186,
+  "minMs": 280.90000000596046,
+  "maxMs": 314.7000000178814
+}
