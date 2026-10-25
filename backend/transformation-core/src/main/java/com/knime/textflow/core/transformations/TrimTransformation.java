@@ -1,10 +1,10 @@
 package com.knime.textflow.core.transformations;
 
-import com.google.auto.service.AutoService;
-import com.knime.textflow.core.*;
 import java.util.List;
 import java.util.Map;
-import static com.knime.textflow.core.Parameters.*;
+
+import com.google.auto.service.AutoService;
+import com.knime.textflow.core.Transformation;
 
 @AutoService(Transformation.class)
 public final class TrimTransformation implements Transformation {

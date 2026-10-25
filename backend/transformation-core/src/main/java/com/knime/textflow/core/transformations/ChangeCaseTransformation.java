@@ -1,11 +1,12 @@
 package com.knime.textflow.core.transformations;
 
-import com.google.auto.service.AutoService;
-import com.knime.textflow.core.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Locale;
-import static com.knime.textflow.core.Parameters.*;
+import java.util.Map;
+
+import com.google.auto.service.AutoService;
+import static com.knime.textflow.core.Parameters.choice;
+import com.knime.textflow.core.Transformation;
 
 @AutoService(Transformation.class)
 public final class ChangeCaseTransformation implements Transformation {

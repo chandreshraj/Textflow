@@ -1,0 +1,119 @@
+.pipeline-card {
+  padding: 19px 19px 0
+}
+.pipeline-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+.pipeline-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 12px 0 20px
+}
+.step {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  margin-bottom: 12px;
+  background: #fff
+}
+.step-invalid {
+  border-color: #df8b8b
+}
+.step-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+  background: var(--surface-subtle);
+  border-radius: 7px 7px 0 0;
+  border-bottom: 1px solid var(--border-light)
+}
+.step-index {
+  font: 12px monospace;
+  color: var(--text-secondary)
+}
+.step h3 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600
+}
+.step-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px
+}
+.step-actions button {
+  border: 0;
+  display: flex;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px
+}
+.step-actions button:hover {
+  background: var(--accent-soft)
+}
+.step-actions>span {
+  height: 12px;
+  border-left: 1px solid var(--border);
+  margin: 0 6px
+}
+.parameters {
+  padding: 13px;
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap
+}
+.no-parameters {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 0
+}
+.pipeline-bottom {
+  margin: 20px -19px 0;
+  padding: 15px 19px;
+  background: var(--surface-subtle);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px
+}
+.pipeline-bottom>span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-secondary)
+}
+.empty-pipeline {
+  border: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 15px;
+  color: var(--text-secondary);
+  text-align: center;
+  border-radius: 7px
+}
+.empty-pipeline strong {
+  font-size: 12px;
+  font-weight: 500
+}
+.empty-pipeline span {
+  font-size: 12px
+}
+
+.pipeline-bottom .live-status {
+  display: flex;
+  color: var(--text-muted);
+  margin-left: auto;
+  font-size: 12px;
+}

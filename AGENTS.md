@@ -38,6 +38,8 @@ docs/                     Architecture, decisions, and AI usage notes
 README.md                 Setup, commands, usage, and limitations
 ```
 
+- Pipeline state uses immutable array/step replacements through `usePipeline` actions; metadata and results use shallow references. Do not mutate nested step state directly or reintroduce a deep preview watcher. Coalesce tooltip positioning into animation frames and clean up pending frames.
+- Keep `App.vue` as page composition. Place HTTP calls in `frontend/src/api`, shared workflow state in `composables`, and presentation in focused components. Children emit typed edit events rather than mutating nested props. Keep styles grouped by responsibility under `frontend/src/styles`.
 - Keep transformation semantics in the Java library. Do not duplicate processing in the browser or HTTP controllers.
 - Keep the core usable and testable without starting a web server.
 - Represent a pipeline as an ordered collection of transformation identifiers and parameter values.
@@ -82,11 +84,11 @@ Provide a complete path from input text to a configured pipeline and readable ou
 
 - Let users add, configure, remove, and reorder transformation steps.
 - Make execution order and parameter labels clear.
-- Provide readable input and output areas, a clear run action, and helpful empty states.
+- Provide readable input and output areas, automatic output updates after input or pipeline edits, and helpful empty states.
 - Show loading, validation, API failure, and successful result states.
 - Preserve configuration when validation fails and avoid displaying stale results as current.
 - Associate errors with their fields or steps. Use labeled controls, visible focus, sufficient contrast, and keyboard-accessible reordering.
-- If previews run automatically, debounce requests and prevent older responses from replacing newer results.
+- Debounce automatic previews, cancel obsolete requests, prevent older responses from replacing newer results, and dispose pending timers and requests when leaving the workspace.
 - Keep the interface usable at narrow widths. Prefer a focused, polished workflow over unrelated features.
 
 ## Verification
@@ -109,6 +111,7 @@ Once tooling exists, run the relevant tests, type checks, lint checks, and produ
 - Keep changes scoped to the user's request. Preserve unrelated work and avoid destructive Git operations.
 - Use strict TypeScript, typed contracts, and established formatter conventions. Avoid untyped escape hatches without a concrete reason.
 - Pin dependencies through build configuration and frontend lockfiles; check in the build wrapper. Keep secrets, generated output, dependency directories, and local configuration out of version control.
+- The root Dockerfile builds and tests both modules, then runs the combined JAR as a non-root user. Keep container context exclusions in `.dockerignore`; bind the server to all container interfaces and publish its port on host loopback for local Podman use. See README for build/run commands.
 - Keep commits reviewable and document significant tradeoffs without manufacturing or rewriting history.
 - Do not publish, submit, contact the hiring team, or send logs externally without user authorization.
 

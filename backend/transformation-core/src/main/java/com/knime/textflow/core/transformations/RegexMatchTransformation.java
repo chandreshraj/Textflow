@@ -1,12 +1,14 @@
 package com.knime.textflow.core.transformations;
 
-import com.google.auto.service.AutoService;
-import com.knime.textflow.core.*;
 import java.util.List;
 import java.util.Map;
+
+import com.google.auto.service.AutoService;
 import com.google.re2j.Pattern;
 import com.google.re2j.PatternSyntaxException;
-import static com.knime.textflow.core.Parameters.*;
+import static com.knime.textflow.core.Parameters.text;
+import com.knime.textflow.core.TransformException;
+import com.knime.textflow.core.Transformation;
 
 @AutoService(Transformation.class)
 public final class RegexMatchTransformation implements Transformation {
@@ -27,7 +29,8 @@ public final class RegexMatchTransformation implements Transformation {
             var result = new StringBuilder();
             boolean first = true;
             while (matcher.find()) {
-                if (!first) result.append('\n');
+                if (!first)
+                    result.append('\n');
                 result.append(matcher.group());
                 first = false;
             }

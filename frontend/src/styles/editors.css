@@ -1,0 +1,127 @@
+.editor-card,.pipeline-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow)
+}
+.editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 20px;
+  border-bottom: 1px solid var(--border-light);
+  gap: 12px
+}
+.section-number {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 5px
+}
+.editor-card>textarea {
+  display: block;
+  border: 0;
+  resize: vertical;
+  min-height: 111px;
+  width: 100%;
+  padding: 21px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  background: white;
+  color: var(--ink)
+}
+.editor-card>textarea:focus {
+  outline-offset: -3px
+}
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-top: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-subtle)
+}
+.field {
+  flex: 1;
+  min-width: 120px
+}
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 7px
+}
+.field input:not([type=checkbox]),.field select,.field textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 5px;
+  padding: 9px 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  min-height: 44px
+}
+.field input[aria-invalid=true] {
+  border-color: #c85353
+}
+.field-error {
+  display: block;
+  color: #ad3636;
+  font-size: 12px;
+  margin: 7px 0
+}
+.output-card pre,.trace pre {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink);
+  padding: 20px;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 300px;
+  overflow: auto;
+  min-height: 105px
+}
+.output-card pre {
+  background: var(--surface-subtle)
+}
+.output-placeholder {
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--text-muted)
+}
+.output-placeholder-icon {
+  display: flex;
+  padding: 8px;
+  background: var(--surface-muted);
+  border-radius: 8px
+}
+.output-placeholder p {
+  font-size: 12px;
+  margin: 10px 0 6px;
+  color: var(--text-muted)
+}
+.output-placeholder small {
+  font-size: 12px;
+  color: var(--text-muted)
+}
+.success-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #488867;
+  background: #eff8f2;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 500
+}

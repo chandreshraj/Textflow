@@ -4,9 +4,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
 
-/** Uses Java SPI providers generated at compilation by @AutoService. No framework required. */
+/**
+ * Uses Java SPI providers generated at compilation by @AutoService. No
+ * framework required.
+ */
 public final class TransformationDiscovery {
-    private TransformationDiscovery() {}
+    private TransformationDiscovery() {
+    }
 
     public static List<Transformation> load() {
         return load(Transformation.class.getClassLoader());

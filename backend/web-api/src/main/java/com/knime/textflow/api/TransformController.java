@@ -1,14 +1,32 @@
 package com.knime.textflow.api;
-import com.knime.textflow.core.*;
+
 import java.util.List;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.knime.textflow.core.Processor;
+import com.knime.textflow.core.Transformation;
+
 @RestController
 @RequestMapping("/api")
 public class TransformController {
-    private final Processor processor=new Processor(TransformationDiscovery.load());
-    public record Request(Object input, List<Processor.Step> pipeline) {}
+    private final Processor processor;
+
+    public TransformController(Processor processor) {
+        this.processor = processor;
+    }
+
     @GetMapping("/transformations")
-    public List<Transformation.Descriptor> transformations() { return processor.descriptors(); }
+    public List<Transformation.Descriptor> transformations() {
+        return processor.descriptors();
+    }
+
     @PostMapping("/transform")
-    public Processor.Result transform(@RequestBody Request request) { if (!(request.input() instanceof String input)) throw new TransformException("Input must be a string.",null,"input"); return processor.execute(input,request.pipeline()); }
+    public Processor.Result transform(@RequestBody TransformRequest request) {
+        return processor.execute(request.inputText(), request.pipeline());
+    }
 }

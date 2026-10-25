@@ -1,0 +1,16 @@
+# Send only application sources to the build, excluding local/generated files.
+*
+!Dockerfile
+!frontend/
+!frontend/**
+!backend/
+!backend/**
+**/node_modules
+**/dist
+**/target
+**/playwright-report
+**/test-results
+**/.env*
+**/.DS_Store
+frontend/e2e
+frontend/playwright.config.ts

@@ -1,11 +1,15 @@
 package com.knime.textflow.core;
 
-import com.google.auto.service.AutoService;
 import java.util.List;
 import java.util.Map;
+
+import com.google.auto.service.AutoService;
 import static com.knime.textflow.core.Parameters.text;
 
-/** Deliberately absent from production sources and any explicit registration list. */
+/**
+ * Deliberately absent from production sources and any explicit registration
+ * list.
+ */
 @AutoService(Transformation.class)
 public final class DiscoveredTestTransformation implements Transformation {
     @Override

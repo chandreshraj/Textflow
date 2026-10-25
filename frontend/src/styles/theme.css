@@ -1,0 +1,25 @@
+/* Visual reference: https://www.knime.com/ (reviewed 2026-10-23).
+   Yellow, orange, Figtree and Inter reflect the site; neutral surfaces are
+   adapted for a dense editing workspace. Textflow retains its own identity. */
+:root {
+  --font-body: 'Inter', Verdana, sans-serif;
+  --font-heading: 'Figtree', Verdana, sans-serif;
+  --accent: #fdd800;
+  --accent-hover: #efca00;
+  --accent-soft: #fff8d6;
+  --accent-border: #e3c747;
+  --accent-ink: #685500;
+  --orange: #f89639;
+  --orange-text: #ad5507; /* Darker variant for readable text on white. */
+  --ink: #201e1e;
+  --text-secondary: #53514e;
+  --text-muted: #67645f;
+  --canvas: #f7f7f5;
+  --surface: #ffffff;
+  --surface-subtle: #fafaf8;
+  --surface-muted: #f1f0ec;
+  --border: #deddd7;
+  --border-light: #eae9e3;
+  --focus: #806600;
+  --shadow: 0 2px 6px #201e1e06;
+}

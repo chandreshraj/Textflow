@@ -1,0 +1,32 @@
+.trace {
+  margin-top: 24px
+}
+.trace h2 {
+  margin-bottom: 12px;
+  font-size: 12px
+}
+.trace button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: white;
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 12px
+}
+.trace button>svg:first-child {
+  color: #569277
+}
+.trace small {
+  margin-left: auto;
+  color: var(--text-muted)
+}
+.trace pre {
+  font-size: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  min-height: 0
+}

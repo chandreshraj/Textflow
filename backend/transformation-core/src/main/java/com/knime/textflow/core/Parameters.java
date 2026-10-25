@@ -1,11 +1,16 @@
 package com.knime.textflow.core;
 
 import java.util.List;
+
 import com.knime.textflow.core.Transformation.Parameter;
 
-/** Reusable metadata builders; transformation-specific metadata stays with its implementation. */
+/**
+ * Reusable metadata builders; transformation-specific metadata stays with its
+ * implementation.
+ */
 public final class Parameters {
-    private Parameters() {}
+    private Parameters() {
+    }
 
     public static Parameter text(String id, String label, String defaultValue) {
         return new Parameter(id, label, "string", true, defaultValue, null, null, List.of(), "");
